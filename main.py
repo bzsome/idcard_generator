@@ -1,2 +1,4 @@
-from idcard_generator import gui
-gui.run()
+from idcard_generator.gui import IDGen
+
+id_gen = IDGen()
+id_gen.run()

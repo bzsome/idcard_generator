@@ -14,6 +14,7 @@
 
 <img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="left" />
 
+
 ## 直接下载
 
 - Windows [下载exe](https://github.com/bzsome/idcard_generator/releases/download/v1.0.0/idcard_generator_win64_1.0.0.exe)

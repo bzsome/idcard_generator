@@ -54,12 +54,16 @@ gui.run()
 `pip install pyinstaller`
 
 Mac打包(打包成Mac app尚有问题未解决)
-    
-    pyinstaller -i asserts/ico.icns --windowed --clean --noconfirm --onefile --add-data ./asserts:./asserts main.py
+
+`pyinstaller -i asserts/ico.icns --windowed --clean --noconfirm --onefile --add-data ./asserts:./asserts main.py`
 
 Windows打包
 
-    pyinstaller -i asserts/ico.ico --windowed --clean --noconfirm --onefile --add-data "asserts;asserts" main.py
+`pyinstaller -i asserts/ico.ico --windowed --clean --noconfirm --onefile --add-data "asserts;asserts" main.py`
+
+Windows打包(控制台输出日志)
+
+`pyinstaller -i asserts/ico.ico -c --clean --noconfirm --onefile --add-data "asserts;asserts" main.py`
 
 ## 参照标准：
 

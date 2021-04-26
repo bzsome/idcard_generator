@@ -1,3 +1,24 @@
+import os
+import sys
+import webbrowser
+
+
+def get_base_path():
+    # 是否Bundle Resource
+    if getattr(sys, 'frozen', False):
+        # 单个exe解药后的路径
+        base_path = sys._MEIPASS
+    else:
+        # 不打包，正常执行的路径
+        base_path = os.path.abspath(".")
+    return base_path
+
+
+# 此处必须注意，绑定的事件函数中必须要包含event参数
+def open_url(event):
+    webbrowser.open("https://github.com/bzsome", new=0)
+
+
 # 获得显示长度，中文占2位
 def get_show_len(txt):
     len_txt = len(txt)

@@ -6,6 +6,8 @@ import cv2
 import numpy as np
 from PIL import ImageFont, ImageDraw
 
+from idcard_generator import utils
+
 try:
     from Tkinter import *
     from ttk import *
@@ -81,32 +83,37 @@ class IDGen:
         set_entry_value(self.eLife, "2010.01.01-2020.12.12")
 
     def generator(self):
-        addr = self.eAddr.get()
-
         f_name = askopenfilename(initialdir=os.getcwd(), title='选择头像')
+        if f_name is None:
+            return
+
         im = PImage.open(os.path.join(base_dir, 'empty.png'))
         avatar = PImage.open(f_name)  # 500x670
 
         name_font = ImageFont.truetype(os.path.join(base_dir, 'fonts/hei.ttf'), 72)
-        other_font = ImageFont.truetype(os.path.join(base_dir, 'fonts/hei.ttf'), 60)
+        other_font = ImageFont.truetype(os.path.join(base_dir, 'fonts/hei.ttf'), 64)
         birth_date_font = ImageFont.truetype(os.path.join(base_dir, 'fonts/fzhei.ttf'), 60)
-        id_font = ImageFont.truetype(os.path.join(base_dir, 'fonts/ocrb10bt.ttf'), 72)
+        id_font = ImageFont.truetype(os.path.join(base_dir, 'fonts/ocrb10bt.ttf'), 90)
 
         draw = ImageDraw.Draw(im)
         draw.text((630, 690), self.eName.get(), fill=(0, 0, 0), font=name_font)
         draw.text((630, 840), self.eSex.get(), fill=(0, 0, 0), font=other_font)
         draw.text((1030, 840), self.eNation.get(), fill=(0, 0, 0), font=other_font)
-        draw.text((630, 980), self.eYear.get(), fill=(0, 0, 0), font=birth_date_font)
-        draw.text((950, 980), self.eMon.get(), fill=(0, 0, 0), font=birth_date_font)
-        draw.text((1150, 980), self.eDay.get(), fill=(0, 0, 0), font=birth_date_font)
-        start = 0
-        loc = 1120
-        while start + 11 < len(addr):
-            draw.text((630, loc), addr[start:start + 11], fill=(0, 0, 0), font=other_font)
-            start += 11
+        draw.text((630, 975), self.eYear.get(), fill=(0, 0, 0), font=birth_date_font)
+        draw.text((950, 975), self.eMon.get(), fill=(0, 0, 0), font=birth_date_font)
+        draw.text((1150, 975), self.eDay.get(), fill=(0, 0, 0), font=birth_date_font)
+
+        # 住址
+        loc = 1115
+        addr_lines = self.get_addr_lines()
+        for addr_line in addr_lines:
+            draw.text((630, loc), addr_line, fill=(0, 0, 0), font=other_font)
             loc += 100
-        draw.text((630, loc), addr[start:], fill=(0, 0, 0), font=other_font)
-        draw.text((950, 1475), self.eIdn.get(), fill=(0, 0, 0), font=id_font)
+
+        # 身份证号
+        draw.text((900, 1475), self.eIdn.get(), fill=(0, 0, 0), font=id_font)
+
+        # 背面
         draw.text((1050, 2750), self.eOrg.get(), fill=(0, 0, 0), font=other_font)
         draw.text((1050, 2895), self.eLife.get(), fill=(0, 0, 0), font=other_font)
 
@@ -169,6 +176,18 @@ class IDGen:
         randomBtn.grid(row=7, column=0, sticky=W, padx=16, pady=3, columnspan=2)
         genBtn = Button(root, text='生成', width=24, command=self.generator)
         genBtn.grid(row=7, column=2, sticky=W, padx=1, pady=3, columnspan=4)
+
+    # 获得要显示的住址数组
+    def get_addr_lines(self):
+        addr = self.eAddr.get()
+        addr_lines = []
+        start = 0
+        while start < utils.get_show_len(addr):
+            show_txt = utils.get_show_txt(addr, start, start + 22)
+            addr_lines.append(show_txt)
+            start = start + 22
+
+        return addr_lines
 
     def run(self):
         root = Tk()

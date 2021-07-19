@@ -1,6 +1,5 @@
-import os
 import random
-import sys
+import threading
 import tkinter
 from tkinter.filedialog import *
 from tkinter.messagebox import *
@@ -11,7 +10,7 @@ import cv2
 import numpy
 from PIL import ImageFont, ImageDraw
 
-from idcard_generator import utils, id_card_utils, name_utils
+from idcard_generator import id_card_utils, name_utils, utils, loading_alert
 
 asserts_dir = os.path.join(utils.get_base_path(), 'asserts')
 print("asserts_dir", asserts_dir)
@@ -80,12 +79,21 @@ class IDGen:
         expire_time = id_card_utils.get_expire_time()
         set_entry_value(self.eLife, start_time + "-" + expire_time)
 
-    def generator(self):
-        f_name = askopenfilename(initialdir=os.getcwd(), title='选择头像')
-        if len(f_name) == 0:
+    def generator_image(self):
+        self.f_name = askopenfilename(initialdir=os.getcwd(), title='选择头像')
+        if len(self.f_name) == 0:
             return
 
-        avatar = PImage.open(f_name)  # 500x670
+        self.loading_bar = loading_alert.LoadingBar(title="提示", content="图片正在生成...")
+        self.loading_bar.show(self.root)
+
+        # 开启新线程保持滚动条显示
+        wait_thread = threading.Thread(target=self.handle_image)
+        wait_thread.setDaemon(True)
+        wait_thread.start()
+
+    def handle_image(self):
+        avatar = PImage.open(self.f_name)  # 500x670
         empty_image = PImage.open(os.path.join(asserts_dir, 'empty.png'))
 
         name_font = ImageFont.truetype(os.path.join(asserts_dir, 'fonts/hei.ttf'), 72)
@@ -129,9 +137,11 @@ class IDGen:
         empty_image.save('color.png')
         empty_image.convert('L').save('bw.png')
 
+        self.loading_bar.close()
         showinfo('成功', '文件已生成到目录下,黑白bw.png和彩色color.png')
 
     def show_ui(self, root):
+        self.root = root
         root.title('AIRobot身份证图片生成器')
         # root.geometry('640x480')
         root.resizable(width=False, height=False)
@@ -181,7 +191,7 @@ class IDGen:
 
         random_btn = Button(root, text='随机', width=8, command=self.random_data)
         random_btn.grid(row=8, column=0, sticky=tkinter.W, padx=16, pady=3, columnspan=2)
-        generator_btn = Button(root, text='选择头像并生成', width=24, command=self.generator)
+        generator_btn = Button(root, text='选择头像并生成', width=24, command=self.generator_image)
         generator_btn.grid(row=8, column=2, sticky=tkinter.W, padx=1, pady=3, columnspan=4)
 
         # 触发随机生成

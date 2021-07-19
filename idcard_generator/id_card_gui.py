@@ -11,7 +11,7 @@ import cv2
 import numpy
 from PIL import ImageFont, ImageDraw
 
-from idcard_generator import utils, id_card_utils
+from idcard_generator import utils, id_card_utils, name_utils
 
 asserts_dir = os.path.join(utils.get_base_path(), 'asserts')
 print("asserts_dir", asserts_dir)
@@ -63,17 +63,18 @@ def paste(avatar, bg, zoom_size, center):
 
 class IDGen:
     def random_data(self):
-        set_entry_value(self.eName, "张三")
-        set_entry_value(self.eSex, "男")
+        random_name = name_utils.random_name()
+        set_entry_value(self.eName, random_name["name_full"])
+        set_entry_value(self.eSex, '女' if random_name['sex'] == 0 else "男")
         set_entry_value(self.eNation, "汉")
-        year = str(random.randint(1900, 2020))
+        year = random.randint(1900, 2020)
         set_entry_value(self.eYear, year)
-        month = str(random.randint(1, 12))
+        month = random.randint(1, 12)
         set_entry_value(self.eMon, month)
-        day = str(random.randint(1, 28))
+        day = id_card_utils.random_day(year, month)
         set_entry_value(self.eDay, day)
         set_entry_value(self.eAddr, "四川省成都市武侯区益州大道中段722号复城国际")
-        set_entry_value(self.eIdn, id_card_utils.random_card_no(year=year, month=month, day=day))
+        set_entry_value(self.eIdn, id_card_utils.random_card_no(year=str(year), month=str(month), day=str(day)))
         set_entry_value(self.eOrg, "四川省成都市锦江分局")
         start_time = id_card_utils.get_start_time()
         expire_time = id_card_utils.get_expire_time()

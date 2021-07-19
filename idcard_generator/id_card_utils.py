@@ -1,5 +1,6 @@
 import datetime
 import random
+import calendar
 
 
 # 计算最后一位校验码
@@ -47,6 +48,12 @@ def random_card_no(prefix='', year='', month='', day=''):
     card_17 = prefix + year + month + day + rand_value
     vi_code = IdentityCard.calculate(card_17)
     return card_17 + vi_code
+
+
+# 随机生成身份证号
+def random_day(year=2020, month=2):
+    monthRange = calendar.monthrange(year, month)
+    return random.randint(1, monthRange[1])
 
 
 # 身份证起始日

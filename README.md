@@ -26,6 +26,7 @@
 - 自动从纯色背景中抠图
 - 支持pip安装
 - 随机生成身份信息
+- 固定依赖版本(防止高版本不兼容)
 
 ## 暂未完成
 
@@ -40,7 +41,7 @@
 ## 源码安装
 
 ```
-pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple
+pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
 python main.py
 ```
 

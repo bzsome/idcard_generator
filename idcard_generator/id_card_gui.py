@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 import tkinter
 from tkinter.filedialog import *
@@ -65,13 +66,18 @@ class IDGen:
         set_entry_value(self.eName, "张三")
         set_entry_value(self.eSex, "男")
         set_entry_value(self.eNation, "汉")
-        set_entry_value(self.eYear, "1995")
-        set_entry_value(self.eMon, "7")
-        set_entry_value(self.eDay, "17")
+        year = str(random.randint(1900, 2020))
+        set_entry_value(self.eYear, year)
+        month = str(random.randint(1, 12))
+        set_entry_value(self.eMon, month)
+        day = str(random.randint(1, 28))
+        set_entry_value(self.eDay, day)
         set_entry_value(self.eAddr, "四川省成都市武侯区益州大道中段722号复城国际")
-        set_entry_value(self.eIdn, id_card_utils.random_card_no(birth_date="19950717"))
+        set_entry_value(self.eIdn, id_card_utils.random_card_no(year=year, month=month, day=day))
         set_entry_value(self.eOrg, "四川省成都市锦江分局")
-        set_entry_value(self.eLife, "2010.01.01-2020.12.12")
+        start_time = id_card_utils.get_start_time()
+        expire_time = id_card_utils.get_expire_time()
+        set_entry_value(self.eLife, start_time + "-" + expire_time)
 
     def generator(self):
         f_name = askopenfilename(initialdir=os.getcwd(), title='选择头像')
@@ -168,6 +174,7 @@ class IDGen:
         self.eLife.grid(row=6, column=1, sticky=tkinter.W, padx=3, pady=3, columnspan=5)
         Label(root, text='选项:').grid(row=7, column=0, sticky=tkinter.W, padx=3, pady=3)
         self.eBgvar = tkinter.IntVar()
+        self.eBgvar.set(1)
         self.ebg = Checkbutton(root, text='自动抠图', variable=self.eBgvar)
         self.ebg.grid(row=7, column=1, sticky=tkinter.W, padx=3, pady=3, columnspan=5)
 
@@ -175,6 +182,9 @@ class IDGen:
         random_btn.grid(row=8, column=0, sticky=tkinter.W, padx=16, pady=3, columnspan=2)
         generator_btn = Button(root, text='选择头像并生成', width=24, command=self.generator)
         generator_btn.grid(row=8, column=2, sticky=tkinter.W, padx=1, pady=3, columnspan=4)
+
+        # 触发随机生成
+        self.random_data()
 
     # 获得要显示的住址数组
     def get_addr_lines(self):

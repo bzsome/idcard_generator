@@ -8,25 +8,26 @@
 
 在线抠图地址:(https://burner.bonanza.com/) (https://www.gaoding.com/koutu)
 
+## 直接下载程序
+
+- 身份证构造器Windows版： [idcard_generator_win64.exe](https://github.com/bzsome/idcard_generator/releases/download/v1.0.0/idcard_generator_win64_1.0.0.exe)
+
+- 身份证构造器Macos版：`待发布，预计下一版本发布`
+
 ## 运行效果
 
 <img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图" align="left" />
 
 <img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="left" />
 
-
-## 直接下载
-
-- Windows [下载exe](https://github.com/bzsome/idcard_generator/releases/download/v1.0.0/idcard_generator_win64_1.0.0.exe)
-
-- Mac `暂不支持下载`
-
 ## 更新记录:
 
 - 自动改变头像大小
 - 自动从纯色背景中抠图
 - 支持pip安装
-- 随机生成身份信息
+- 随机生成身份信息(姓名，出生日期，身份证号)
+- 固定依赖版本(防止高版本不兼容)
+- 生成图片时显示处理弹窗
 
 ## 暂未完成
 
@@ -41,7 +42,7 @@
 ## 源码安装
 
 ```
-pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple
+pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
 python main.py
 ```
 

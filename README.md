@@ -16,9 +16,9 @@
 
 ## 运行效果
 
-<img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图" align="left" />
+<img src="./docs/images/example_01.png" width="60%" height="50%" alt="程序运行图" align="left" />
 
-<img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="left" />
+<img src="./docs/images/result_color.png" width="60%" height="50%" alt="生成结果图" align="left" />
 
 ## 更新记录:
 

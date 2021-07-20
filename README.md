@@ -1,4 +1,4 @@
-# idcard_generator
+# 身份证图片构造器 idcard_generator
 
 【仅做研究使用，请遵守当地法律法规，法律后果自负】
 
@@ -6,7 +6,7 @@
 
 可以选择是否自动抠图，自动抠图目前仅支持纯色背景，对自动抠图效果不满意可以手动抠图。
 
-在线抠图地址:(https://burner.bonanza.com/) (https://www.gaoding.com/koutu)
+在线抠图地址: (https://burner.bonanza.com/) (https://www.gaoding.com/koutu)
 
 ## 直接下载程序
 
@@ -16,39 +16,32 @@
 
 ## 运行效果
 
-![test image size](./docs/images/example_01.png){:height="50%" width="50%"}
+<img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图" align="center" />
 
-![test image size](./docs/images/result_color.png){:height="50%" width="50%"
+<img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
 
----------------
-
-### 更新记录:
+## 更新记录:
 
 - 自动改变头像大小
 - 自动从纯色背景中抠图
-- 支持pip安装
 - 随机生成身份信息(姓名，出生日期，身份证号)
 - 固定依赖版本(防止高版本不兼容)
 - 生成图片时显示处理弹窗
 
-### 暂未完成
-
-- 自动从复杂背景下抠图
-
-### 软件环境
+## 软件环境
 
 - numpy
 - pillow
 - opencv
 
-### 源码安装
+## 源码安装
 
 ```
 pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
 python main.py
 ```
 
-### 打包程序
+## 打包程序
 
 - 安装pyinstaller
 
@@ -66,7 +59,7 @@ python main.py
 
 `pyinstaller -i asserts/ico.ico -c --clean --noconfirm --onefile --add-data "asserts;asserts" main.py`
 
-### 参照标准：
+## 参照标准：
 
 - 正面
 

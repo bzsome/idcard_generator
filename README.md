@@ -20,7 +20,7 @@
 
 <img src="./docs/images/result_color.png" width="60%" height="50%" alt="生成结果图" align="left" />
 
-## 更新记录:
+### 更新记录:
 
 - 自动改变头像大小
 - 自动从纯色背景中抠图
@@ -29,24 +29,24 @@
 - 固定依赖版本(防止高版本不兼容)
 - 生成图片时显示处理弹窗
 
-## 暂未完成
+### 暂未完成
 
 - 自动从复杂背景下抠图
 
-## 软件环境
+### 软件环境
 
 - numpy
 - pillow
 - opencv
 
-## 源码安装
+### 源码安装
 
 ```
 pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
 python main.py
 ```
 
-## 打包程序
+### 打包程序
 
 - 安装pyinstaller
 
@@ -64,7 +64,7 @@ python main.py
 
 `pyinstaller -i asserts/ico.ico -c --clean --noconfirm --onefile --add-data "asserts;asserts" main.py`
 
-## 参照标准：
+### 参照标准：
 
 - 正面
 

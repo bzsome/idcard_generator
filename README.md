@@ -1,4 +1,4 @@
-# idcard_generator
+# 身份证图片构造器 idcard_generator
 
 【仅做研究使用，请遵守当地法律法规，法律后果自负】
 
@@ -6,32 +6,27 @@
 
 可以选择是否自动抠图，自动抠图目前仅支持纯色背景，对自动抠图效果不满意可以手动抠图。
 
-在线抠图地址:(https://burner.bonanza.com/) (https://www.gaoding.com/koutu)
+在线抠图地址: (https://burner.bonanza.com/) (https://www.gaoding.com/koutu)
+
+## 直接下载程序
+
+- 身份证构造器Windows版： [idcard_generator_win64.exe](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_win64_1.1.0.exe)
+
+- 身份证构造器Macos版：`待发布，预计下一版本发布`
 
 ## 运行效果
 
-<img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图" align="left" />
+<img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图" align="center" />
 
-<img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="left" />
-
-## 直接下载
-
-- Windows [下载exe](https://github.com/bzsome/idcard_generator/releases/download/v1.0.0/idcard_generator_win64_1.0.0.exe)
-
-- Mac `暂不支持下载`
+<img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
 
 ## 更新记录:
 
 - 自动改变头像大小
 - 自动从纯色背景中抠图
-- 支持pip安装
 - 随机生成身份信息(姓名，出生日期，身份证号)
 - 固定依赖版本(防止高版本不兼容)
 - 生成图片时显示处理弹窗
-
-## 暂未完成
-
-- 自动从复杂背景下抠图
 
 ## 软件环境
 

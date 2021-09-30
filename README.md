@@ -58,13 +58,15 @@ python main.py
 
 `pip install pyinstaller`
 
-- Mac打包(打包成Mac app尚有问题未解决)
+- Mac打包(打包成Mac app)
 
-- 方法一(使用venv模式可能找不到模块)： 
+方法一(使用venv模式需要手动指定paths)： 
 
 `pyinstaller -i asserts/ico.icns --windowed --clean --noconfirm --onefile --add-data ./asserts:./asserts --paths /Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages main.py`
 
-- 方法二(通过pathex指定依赖模块路径)： `pyinstaller main.spec`
+方法二(通过pathex指定依赖模块路径)：
+
+`pyinstaller main.spec`
 
 
 - Windows打包

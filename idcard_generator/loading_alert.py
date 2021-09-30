@@ -66,7 +66,7 @@ class LoadingBar(object):
         tk.Label(self.__dialog, text=self.__content).pack(side=tk.TOP)
 
         # 父窗口禁用
-        self.__parent.attributes("-disabled", 1)
+        self.__parent.grab_set()
 
         # 实际的滚动条控件
         self.progress_bar = ttk.Progressbar(self.__dialog, length=self.__width, mode="indeterminate",
@@ -93,7 +93,7 @@ class LoadingBar(object):
         # 重置必要参数
         self.__dialog = None
         # 父窗口解除禁用
-        self.__parent.attributes("-disabled", 0)
+        self.__parent.grab_release()
 
     def close(self):
         # 设置显示标识为不显示

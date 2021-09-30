@@ -12,13 +12,18 @@
 
 - 身份证构造器Windows版： [idcard_generator_win64.exe](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_win64_1.1.0.exe)
 
-- 身份证构造器Macos版：`待发布，预计下一版本发布`
+- 身份证构造器Macos版：[idcard_generator_macos.zip](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_macos_1.1.0.zip)
+
+- 注意：macos版本启动大约需要时间70s，测试支持系统Macos 11
 
 ## 运行效果
 
-<img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图" align="center" />
+<img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图windows" align="center" />
 
 <img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
+
+<img src="./docs/images/example_macos.png" width="50%" height="50%" alt="程序运行图macos" align="
+
 
 ## 更新记录:
 
@@ -49,7 +54,12 @@ python main.py
 
 - Mac打包(打包成Mac app尚有问题未解决)
 
-`pyinstaller -i asserts/ico.icns --windowed --clean --noconfirm --onefile --add-data ./asserts:./asserts main.py`
+- 方法一(使用venv模式可能找不到模块)： 
+
+`pyinstaller -i asserts/ico.icns --windowed --clean --noconfirm --onefile --add-data ./asserts:./asserts --paths /Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages main.py`
+
+- 方法二(通过pathex指定依赖模块路径)： `pyinstaller main.spec`
+
 
 - Windows打包
 

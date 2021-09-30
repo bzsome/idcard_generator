@@ -16,13 +16,19 @@
 
 - 注意：macos版本启动大约需要时间70s，测试支持系统Macos 11
 
-## 运行效果
+## 运行效果图
+
+- 程序主界面（windows）
 
 <img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图windows" align="center" />
 
-<img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
+- 程序主界面（Macos）
 
-<img src="./docs/images/example_macos.png" width="50%" height="50%" alt="程序运行图macos" align="
+<img src="./docs/images/example_macos.png" width="50%" height="50%" alt="程序运行图macos" align="center" />
+
+- 生成结果示例
+
+<img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
 
 
 ## 更新记录:

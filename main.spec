@@ -7,7 +7,7 @@ block_cipher = None
 a = Analysis(['main.py'],
              pathex=['/Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages', '/Users/chao/PycharmProjects/idcard_generator'],
              binaries=[],
-             datas=[('./asserts', './asserts')],
+             datas=[('./raw', './raw')],
              hiddenimports=[],
              hookspath=[],
              hooksconfig={},
@@ -37,8 +37,8 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          entitlements_file=None , icon='asserts/ico.icns')
+          entitlements_file=None , icon='raw/ico.icns')
 app = BUNDLE(exe,
              name='main.app',
-             icon='asserts/ico.icns',
+             icon='raw/ico.icns',
              bundle_identifier=None)

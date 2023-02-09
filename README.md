@@ -20,15 +20,15 @@
 
 - 程序主界面（windows）
 
-<img src="./docs/images/example_01.png" width="50%" height="50%" alt="程序运行图windows" align="center" />
+<img src="docs/images/example_01.png" width="50%" height="50%" alt="程序运行图windows" align="center" />
 
 - 程序主界面（Macos）
 
-<img src="./docs/images/example_macos.png" width="50%" height="50%" alt="程序运行图macos" align="center" />
+<img src="docs/images/example_macos.png" width="50%" height="50%" alt="程序运行图macos" align="center" />
 
 - 生成结果示例
 
-<img src="./docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
+<img src="docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
 
 
 ## 更新记录:
@@ -40,7 +40,7 @@
 - 生成图片时显示处理弹窗
 
 ## 软件环境
-
+- python3.7
 - numpy
 - pillow
 - opencv
@@ -48,6 +48,7 @@
 ## 源码安装
 
 ```
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
 python main.py
 ```
@@ -62,7 +63,7 @@ python main.py
 
 方法一(使用venv模式需要手动指定paths)： 
 
-`pyinstaller -i asserts/ico.icns --windowed --clean --noconfirm --onefile --add-data ./asserts:./asserts --paths /Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages main.py`
+`pyinstaller -i raw/ico.icns --windowed --clean --noconfirm --onefile --add-data ./raw:./raw --paths /Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages main.py`
 
 方法二(通过pathex指定依赖模块路径)：
 
@@ -71,11 +72,11 @@ python main.py
 
 - Windows打包
 
-`pyinstaller -i asserts/ico.ico --windowed --clean --noconfirm --onefile --add-data "asserts;asserts" main.py`
+`pyinstaller -i raw/ico.ico --windowed --clean --noconfirm --onefile --add-data "raw;raw" main.py`
 
 - Windows打包(控制台输出日志)
 
-`pyinstaller -i asserts/ico.ico -c --clean --noconfirm --onefile --add-data "asserts;asserts" main.py`
+`pyinstaller -i raw/ico.ico -c --clean --noconfirm --onefile --add-data "raw;raw" main.py`
 
 ## 参照标准：
 

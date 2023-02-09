@@ -1,0 +1,10 @@
+numpy==1.20.3
+pillow==8.3.1
+opencv-python==4.5.4.60
+
+#打包工具
+nuitka==1.4.4
+#压缩打包程序
+zstandard==0.19.0
+#提升打包性能
+ordered-set==4.1.0

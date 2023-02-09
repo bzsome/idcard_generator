@@ -6,7 +6,12 @@
 dist
 build
 venv
+out
 
 #idea
 .idea
 *.log
+
+#project
+bw.png
+color.png

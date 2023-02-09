@@ -63,7 +63,7 @@ python main.py
 
 方法一(使用venv模式需要手动指定paths)： 
 
-`pyinstaller -i raw/ico.icns --windowed --clean --noconfirm --onefile --add-data ./raw:./raw --paths /Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages main.py`
+`pyinstaller -i raw/img/ico.icns --windowed --clean --noconfirm --onefile --add-data ./raw:./raw --paths /Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages main.py`
 
 方法二(通过pathex指定依赖模块路径)：
 
@@ -72,11 +72,11 @@ python main.py
 
 - Windows打包
 
-`pyinstaller -i raw/ico.ico --windowed --clean --noconfirm --onefile --add-data "raw;raw" main.py`
+`pyinstaller -i raw/img/ico.ico --windowed --clean --noconfirm --onefile --add-data "raw;raw" main.py`
 
 - Windows打包(控制台输出日志)
 
-`pyinstaller -i raw/ico.ico -c --clean --noconfirm --onefile --add-data "raw;raw" main.py`
+`pyinstaller -i raw/img/ico.ico -c --clean --noconfirm --onefile --add-data "raw;raw" main.py`
 
 ## 参照标准：
 

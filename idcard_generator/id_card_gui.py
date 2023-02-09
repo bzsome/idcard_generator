@@ -96,7 +96,7 @@ class IDGen:
 
     def handle_image(self):
         avatar = PImage.open(self.f_name)  # 500x670
-        empty_image = PImage.open(os.path.join(raw_dir, 'empty.png'))
+        empty_image = PImage.open(os.path.join(raw_dir, 'img/empty.png'))
 
         name_font = ImageFont.truetype(os.path.join(raw_dir, 'fonts/hei.ttf'), 72)
         other_font = ImageFont.truetype(os.path.join(raw_dir, 'fonts/hei.ttf'), 64)
@@ -214,7 +214,7 @@ class IDGen:
     def run(self):
         root = tkinter.Tk()
         self.show_ui(root)
-        ico_path = os.path.join(raw_dir, 'logo.ico')
+        ico_path = os.path.join(raw_dir, 'img/logo.ico')
         root.iconbitmap(ico_path)
         root.protocol('WM_DELETE_WINDOW', lambda: sys.exit(0))
         root.mainloop()

@@ -37,8 +37,8 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          entitlements_file=None , icon='raw/ico.icns')
+          entitlements_file=None , icon='raw/img/ico.icns')
 app = BUNDLE(exe,
              name='main.app',
-             icon='raw/ico.icns',
+             icon='raw/img/ico.icns',
              bundle_identifier=None)

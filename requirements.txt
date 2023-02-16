@@ -1,0 +1,6 @@
+numpy==1.20.3
+pillow==8.3.1
+opencv-python==4.5.4.60
+
+#打包工具
+pyinstaller==5.8.0

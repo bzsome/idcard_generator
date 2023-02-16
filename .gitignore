@@ -10,3 +10,6 @@ venv
 #idea
 .idea
 *.log
+
+#project
+main.spec

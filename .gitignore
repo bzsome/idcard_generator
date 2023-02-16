@@ -6,6 +6,7 @@
 dist
 build
 venv
+out
 
 #idea
 .idea

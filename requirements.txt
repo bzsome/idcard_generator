@@ -1,5 +1,6 @@
 numpy==1.20.3
-pillow==8.3.1
+imageio==2.25.0
+pillow==8.3.2
 opencv-python==4.5.4.60
 
 #打包工具

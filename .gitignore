@@ -13,4 +13,5 @@ out
 *.log
 
 #project
-main.spec
+out-bw.png
+out-color.png

@@ -1,0 +1,28 @@
+# https://blog.csdn.net/shizheng_Li/article/details/144831931
+[build-system]
+requires = ["setuptools", "wheel", "nuitka"]
+build-backend = "setuptools.build_meta"
+
+[tool.nuitka]
+assume-yes-for-downloads = true
+disable-console = false
+onefile = true
+standalone = true
+enable-plugin = []
+
+[project]
+name = "idcard_generator"
+dynamic = ["version"]
+readme = "README.md"
+dependencies = ["nuitka==2.8.6", "setuptools==67.8.0",
+    "numpy==1.20.3", "imageio==2.25.0", "pillow==8.3.2", "opencv-python==4.6.0.66"]
+
+[project.scripts]
+olmes = "main:main"
+
+[project.optional-dependencies]
+dev = ["nuitka", "setuptools", "wheel", "packaging"]
+
+
+[tool.setuptools.packages.find]
+exclude = ["result", "temp", "docs", "build", "assets*", "out"]

@@ -10,9 +10,13 @@
 
 ## 直接下载程序
 
-- 身份证构造器Windows版： [idcard_generator_win64.exe](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_win64_1.1.0.exe)
+-
 
-- 身份证构造器Macos版：[idcard_generator_macos.zip](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_macos_1.1.0.zip)
+身份证构造器Windows版： [idcard_generator_win64.exe](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_win64_1.1.0.exe)
+
+-
+
+身份证构造器Macos版：[idcard_generator_macos.zip](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_macos_1.1.0.zip)
 
 - 注意：macos版本启动大约需要时间70s，测试支持系统Macos 11
 
@@ -30,7 +34,6 @@
 
 <img src="docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
 
-
 ## 更新记录:
 
 - 自动改变头像大小
@@ -40,6 +43,7 @@
 - 生成图片时显示处理弹窗
 
 ## 软件环境
+
 - python3.7
 - numpy
 - pillow
@@ -47,36 +51,38 @@
 
 ## 源码安装
 
-```
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-pip install idcard_generator -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
-python main.py
+```shell
+cd .venv
+cd Scripts
+activate.bat
+cd ../../
+python3 -m pip install --upgrade pip
+# 下载依赖
+pip install .
 ```
 
 ## 打包程序
 
-- 安装pyinstaller
+- build-dev.bat
 
-`pip install pyinstaller`
+开始打包，快速测试打包功能是否正常，不打包成单个文件
 
-- Mac打包(打包成Mac app)
+- build-test.bat
 
-方法一(使用venv模式需要手动指定paths)： 
+测试打包，基本与release一致，不进行upx压缩
 
-`pyinstaller -i raw/img/ico.icns --windowed --clean --noconfirm --onefile --add-data ./raw:./raw --paths /Users/chao/PycharmProjects/idcard_generator/venv/lib/python3.7/site-packages main.py`
+- build-release.bat
 
-方法二(通过pathex指定依赖模块路径)：
+发布打包，用于发布
 
-`pyinstaller main.spec`
+## 打包性能对比
 
+| 打包方式   | 打包命令                                         | 压缩方式  | 文件大小     | 启动+旋转时间 |
+|--------------|----------------------------------------------|-------|----------|---------|
+| release      | --onefile(禁用UPX)                             | Nuitka 自带 zstd 压缩	 | 52,393KB | 2s+4s   |
+| release-upx  | --onefile + --upx                            | 双重压缩		 | 52,393KB | 2s+4s |
+| release-upxn | --onefile + --upx + --onefile-no-compression | UPX 单次压缩 | 48,451KB | 7s+0s   |
 
-- Windows打包
-
-`pyinstaller -i raw/img/ico.ico --windowed --clean --noconfirm --onefile --add-data "raw;raw" main.py`
-
-- Windows打包(控制台输出日志)
-
-`pyinstaller -i raw/img/ico.ico -c --clean --noconfirm --onefile --add-data "raw;raw" main.py`
 
 ## 参照标准：
 
@@ -87,4 +93,5 @@ python main.py
 - 背面
 
 “姓名”、“性别”、“民族”、“出生年月日”、“住址”、“公民身份号码”为6号黑体字，用蓝色油墨印刷；登记项目中的姓名项用5号黑体字印刷；其他项目则用小5号黑体字印刷；出生年月日
-方正黑体简体字符大小：姓名＋号码（11点）其他（9点）字符间距（AV）：号码（50）字符行距：住址（12点）；身份证号码字体 OCR-B 10 BT 文字 华文细黑。
+方正黑体简体字符大小：姓名＋号码（11点）其他（9点）字符间距（AV）：号码（50）字符行距：住址（12点）；身份证号码字体 OCR-B 10 BT 文字
+华文细黑。

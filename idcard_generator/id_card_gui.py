@@ -14,7 +14,7 @@ from PIL import ImageFont, ImageDraw
 
 from idcard_generator import id_card_utils, name_utils, utils, loading_alert
 
-raw_dir = os.path.join(utils.get_base_path(), 'raw')
+raw_dir = os.path.join(utils.get_base_path(), 'assets')
 print("raw_dir", raw_dir)
 
 
@@ -136,11 +136,11 @@ class IDGen:
             empty_image.paste(avatar, (1500, 690), mask=avatar)
             # im = paste(avatar, im, (500, 670), (690, 1500))
 
-        empty_image.save('color.png')
-        empty_image.convert('L').save('bw.png')
+        empty_image.save('out-color.png')
+        empty_image.convert('L').save('out-bw.png')
 
         self.loading_bar.close()
-        showinfo('成功', '文件已生成到目录下,黑白bw.png和彩色color.png')
+        showinfo('成功', '文件已生成到目录下,黑白out-bw.png和彩色out-color.png')
 
     def show_ui(self, root):
         self.root = root

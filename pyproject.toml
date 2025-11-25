@@ -15,7 +15,7 @@ name = "idcard_generator"
 dynamic = ["version"]
 readme = "README.md"
 dependencies = ["nuitka==2.8.6", "setuptools==67.8.0",
-    "numpy==1.20.3", "imageio==2.25.0", "pillow==8.3.2", "opencv-python==4.6.0.66"]
+    "numpy==1.20.3", "imageio==2.25.0", "pillow==8.3.2", "opencv-python-headless==4.8.0.76"]
 
 [project.scripts]
 olmes = "main:main"

@@ -55,7 +55,7 @@ class LoadingBar(object):
         # 设置置顶
         self.__dialog.wm_attributes("-topmost", True)
         # 禁止拉伸窗口
-        self.__dialog.resizable(0, 0)
+        self.__dialog.resizable(False, False)
         # 去除边框
         # self.__dialog.overrideredirect(-1)
         # 去掉窗口最大化最小化按钮，只保留关闭
@@ -81,7 +81,6 @@ class LoadingBar(object):
         self.__dialog.after(250, self.wait_close)
 
     def wait_close(self):
-        print(self.__showFlag)
         if self.__showFlag:
             self.__dialog.after(250, self.wait_close)
             return

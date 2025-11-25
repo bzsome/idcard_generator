@@ -3,6 +3,7 @@ import random
 import sys
 import threading
 import tkinter
+import traceback
 from tkinter.filedialog import *
 from tkinter.messagebox import *
 from tkinter.ttk import *
@@ -63,6 +64,11 @@ def paste(avatar, bg, zoom_size, center):
 
 
 class IDGen:
+    def __init__(self):
+        self.root = None
+        self.f_name = None
+        self.loading_bar = None
+
     def random_data(self):
         random_name = name_utils.random_name()
         set_entry_value(self.eName, random_name["name_full"])
@@ -90,9 +96,19 @@ class IDGen:
         self.loading_bar.show(self.root)
 
         # 开启新线程保持滚动条显示
-        wait_thread = threading.Thread(target=self.handle_image)
-        wait_thread.setDaemon(True)
+        wait_thread = threading.Thread(target=self.handle_image_e)
+        # 注意：setDaemon(True)当新线程停止时，主线程也会停止
+        # wait_thread.setDaemon(True)
         wait_thread.start()
+
+    def handle_image_e(self):
+        try:
+            self.handle_image()
+        except Exception as e:
+            # 打印完整的异常信息
+            traceback.print_exc()
+            self.loading_bar.close()
+            showinfo('错误', str(e))
 
     def handle_image(self):
         avatar = PImage.open(self.f_name)  # 500x670
@@ -138,7 +154,7 @@ class IDGen:
 
         empty_image.save('out-color.png')
         empty_image.convert('L').save('out-bw.png')
-
+        print('文件已生成到目录下,黑白out-bw.png和彩色out-color.png')
         self.loading_bar.close()
         showinfo('成功', '文件已生成到目录下,黑白out-bw.png和彩色out-color.png')
 

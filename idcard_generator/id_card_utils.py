@@ -66,14 +66,3 @@ def get_expire_time():
 def get_start_time():
     start_time = datetime.datetime.now() - datetime.timedelta(days=365 * 10)
     return start_time.strftime("%Y.%m.%d")
-
-
-def test():
-    code = random_card_no()  # 17位身份证
-    print(code)
-    if IdentityCard.check(code):
-        print("你的校验位为:%s" % IdentityCard.calculate(code))
-
-
-if __name__ == '__main__':
-    test()

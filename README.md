@@ -8,19 +8,15 @@
 
 在线抠图地址: (https://burner.bonanza.com/) (https://www.gaoding.com/koutu)
 
-## 直接下载程序
-
--
+## 程序下载
 
 身份证构造器Windows版： [idcard_generator_win64.exe](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_win64_1.1.0.exe)
 
--
-
 身份证构造器Macos版：[idcard_generator_macos.zip](https://github.com/bzsome/idcard_generator/releases/download/v1.1.0/idcard_generator_macos_1.1.0.zip)
 
-- 注意：macos版本启动大约需要时间70s，测试支持系统Macos 11
+注意：macos版本启动大约需要时间70s，测试支持系统Macos 11
 
-## 运行效果图
+### 运行效果图
 
 - 程序主界面（windows）
 
@@ -34,22 +30,33 @@
 
 <img src="docs/images/result_color.png" width="50%" height="50%" alt="生成结果图" align="center" />
 
-## 更新记录:
+### 更新记录
 
 - 自动改变头像大小
+
 - 自动从纯色背景中抠图
+
 - 随机生成身份信息(姓名，出生日期，身份证号)
+
 - 固定依赖版本(防止高版本不兼容)
+
 - 生成图片时显示处理弹窗
 
-## 软件环境
+### 待解决问题
 
-- python3.7
-- numpy
-- pillow
-- opencv
+- 生成时禁止主窗口关闭
 
-## 源码安装
+- 选择图片时过滤文件类型
+
+## 编译开发
+
+- python版本3.7
+
+- 不建议升级python版本，升级后cv2版本需要升级导致库会变大，打包文件大小48,972kb
+
+- opencv-python 3.x版本没有定义接口(可以运行但ide无法代码提示)，nuitka打包后找不到cv2模块
+
+### 依赖安装
 
 ```shell
 cd .venv
@@ -57,34 +64,61 @@ cd Scripts
 activate.bat
 cd ../../
 python3 -m pip install --upgrade pip
+# 手动安装模块(网络下载慢)
+pip install .pip/opencv_python_headless-4.0.1.24-cp37-cp37m-win_amd64.whl
 # 下载依赖
 pip install .
 ```
 
-## 打包程序
+### PyCharm
 
-- build-dev.bat
+控制台直接执行即可
 
-开始打包，快速测试打包功能是否正常，不打包成单个文件
+```
+pip install .
+```
 
-- build-test.bat
+### 打包程序
 
-测试打包，基本与release一致，不进行upx压缩
+| 打包方式              | 打包命令                       |
+|-------------------|----------------------------|
+| build-dev.bat     | 开始打包，快速测试打包功能是否正常，不打包成单个文件 |
+| build-test.bat    | 测试打包，基本与release一致，不进行upx压缩 |
+| build-release.bat | 发布打包，用于发布                  |
 
-- build-release.bat
+### 打包性能对比
 
-发布打包，用于发布
-
-## 打包性能对比
-
-| 打包方式   | 打包命令                                         | 压缩方式  | 文件大小     | 启动+旋转时间 |
-|--------------|----------------------------------------------|-------|----------|---------|
+| 打包方式         | 打包命令                                         | 压缩方式               | 文件大小     | 启动+旋转时间 |
+|--------------|----------------------------------------------|--------------------|----------|---------|
 | release      | --onefile(禁用UPX)                             | Nuitka 自带 zstd 压缩	 | 52,393KB | 2s+4s   |
-| release-upx  | --onefile + --upx                            | 双重压缩		 | 52,393KB | 2s+4s |
-| release-upxn | --onefile + --upx + --onefile-no-compression | UPX 单次压缩 | 48,451KB | 7s+0s   |
+| release-upx  | --onefile + --upx                            | 双重压缩		             | 52,393KB | 2s+4s   |
+| release-upxn | --onefile + --upx + --onefile-no-compression | UPX 单次压缩           | 48,451KB | 7s+0s   |
 
+## 问题记录
 
-## 参照标准：
+### 打包获取不到资源
+
+Nuitka 通常不暴露 sys._MEIPASS，用 os.path.dirname(__file__) 处理兼容性更好。
+
+- 最终解决方案
+
+```pycon
+if hasattr(os, '__builtins__'):
+    if '__nuitka_binary_dir' in os.__builtins__:
+        return os.__builtins__['__nuitka_binary_dir']
+```
+
+### --mode='x' is specified
+
+警告信息：Using module mode specific option '--no-pyi-x' has no effect when neither '--mode=module' or --mode='package' is specified.
+
+解决方案：--standalone 模式时默认不生成pyi文件，所以有此参数时不需要-no-pyi参数
+
+### 打包文件过大
+
+降低opencv-python版本为4.0.1.24
+
+## 参照标准
 
 - 正面
 
@@ -93,5 +127,4 @@ pip install .
 - 背面
 
 “姓名”、“性别”、“民族”、“出生年月日”、“住址”、“公民身份号码”为6号黑体字，用蓝色油墨印刷；登记项目中的姓名项用5号黑体字印刷；其他项目则用小5号黑体字印刷；出生年月日
-方正黑体简体字符大小：姓名＋号码（11点）其他（9点）字符间距（AV）：号码（50）字符行距：住址（12点）；身份证号码字体 OCR-B 10 BT 文字
-华文细黑。
+方正黑体简体字符大小：姓名＋号码（11点）其他（9点）字符间距（AV）：号码（50）字符行距：住址（12点）；身份证号码字体 OCR-B 10 BT 文字华文细黑。

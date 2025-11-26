@@ -4,8 +4,9 @@ nuitka --standalone --onefile ^
 --include-data-dir="assets=assets" ^
 --windows-icon-from-ico="assets/img/logo.ico" ^
 --noinclude-dlls=cv2/opencv_videoio_*.dll ^
---no-pyi-file  --no-pyi-stubs ^
---plugin-enable=upx ^
+--noinclude-dlls=cv2/opencv_ffmpeg*.dll ^
+--enable-plugin=tk-inter ^
+--enable-plugin=upx ^
 --output-dir=build/release-upx ^
 --output-filename=main-release.exe ^
 --run ^

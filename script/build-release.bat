@@ -4,7 +4,8 @@ nuitka --standalone --onefile ^
 --include-data-dir="assets=assets" ^
 --windows-icon-from-ico="assets/img/logo.ico" ^
 --noinclude-dlls=cv2/opencv_videoio_*.dll ^
---no-pyi-file  --no-pyi-stubs ^
+--noinclude-dlls=cv2/opencv_ffmpeg*.dll ^
+--enable-plugin=tk-inter ^
 --output-dir=build/release ^
 --output-filename=main-release.exe ^
 --run ^

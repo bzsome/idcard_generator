@@ -15,3 +15,4 @@ out
 #project
 out-bw.png
 out-color.png
+nuitka-crash-report.xml

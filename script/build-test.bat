@@ -1,11 +1,12 @@
 cd ../
 nuitka --standalone --onefile ^
 --windows-console-mode=attach ^
---nofollow-imports ^
 --include-data-dir="assets=assets" ^
 --windows-icon-from-ico="assets/img/logo.ico" ^
 --noinclude-dlls=cv2/opencv_videoio_*.dll ^
---no-pyi-file  --no-pyi-stubs ^
+--noinclude-dlls=cv2/opencv_ffmpeg*.dll ^
+--enable-plugin=tk-inter ^
+--onefile-no-compression ^
 --output-dir=build/test ^
 --output-filename=main-test.exe ^
 --run ^

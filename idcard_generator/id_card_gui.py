@@ -13,10 +13,8 @@ import cv2
 import numpy
 from PIL import ImageFont, ImageDraw
 
-from idcard_generator import id_card_utils, name_utils, utils, loading_alert
-
-raw_dir = os.path.join(utils.get_base_path(), 'assets')
-print("raw_dir", raw_dir)
+from idcard_generator import id_card_utils, name_utils, utils, loading_alert, key_listen
+from utils import res_util
 
 
 def set_entry_value(entry, value):
@@ -112,12 +110,12 @@ class IDGen:
 
     def handle_image(self):
         avatar = PImage.open(self.f_name)  # 500x670
-        empty_image = PImage.open(os.path.join(raw_dir, 'img/empty.png'))
+        empty_image = PImage.open(res_util.get_assets_path('img/empty.png'))
 
-        name_font = ImageFont.truetype(os.path.join(raw_dir, 'fonts/hei.ttf'), 72)
-        other_font = ImageFont.truetype(os.path.join(raw_dir, 'fonts/hei.ttf'), 64)
-        birth_date_font = ImageFont.truetype(os.path.join(raw_dir, 'fonts/fzhei.ttf'), 60)
-        id_font = ImageFont.truetype(os.path.join(raw_dir, 'fonts/ocrb10bt.ttf'), 90)
+        name_font = ImageFont.truetype(res_util.get_assets_path('fonts/hei.ttf'), 72)
+        other_font = ImageFont.truetype(res_util.get_assets_path('fonts/hei.ttf'), 64)
+        birth_date_font = ImageFont.truetype(res_util.get_assets_path('fonts/fzhei.ttf'), 60)
+        id_font = ImageFont.truetype(res_util.get_assets_path('fonts/ocrb10bt.ttf'), 90)
 
         draw = ImageDraw.Draw(empty_image)
         draw.text((630, 690), self.eName.get(), fill=(0, 0, 0), font=name_font)
@@ -230,7 +228,9 @@ class IDGen:
     def run(self):
         root = tkinter.Tk()
         self.show_ui(root)
-        ico_path = os.path.join(raw_dir, 'img/logo.ico')
+        ico_path = res_util.get_assets_path('img/logo.ico')
         root.iconbitmap(ico_path)
         root.protocol('WM_DELETE_WINDOW', lambda: sys.exit(0))
+        # 绑定所有按键按下事件（<Key> 表示监听所有按键）
+        root.bind("<Key>", key_listen.on_key_press)
         root.mainloop()

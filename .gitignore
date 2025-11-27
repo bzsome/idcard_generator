@@ -13,6 +13,5 @@ out
 *.log
 
 #project
-out-bw.png
-out-color.png
+out-*
 nuitka-crash-report.xml

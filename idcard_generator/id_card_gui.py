@@ -13,7 +13,7 @@ import cv2
 import numpy
 from PIL import ImageFont, ImageDraw
 
-from idcard_generator import id_card_utils, name_utils, utils, loading_alert, key_listen
+from idcard_generator import id_card_utils, name_utils, utils, loading_alert, key_listen, face_opencv
 from utils import res_util
 
 
@@ -86,7 +86,11 @@ class IDGen:
         set_entry_value(self.eLife, start_time + "-" + expire_time)
 
     def generator_image(self):
-        self.f_name = askopenfilename(initialdir=os.getcwd(), title='选择头像')
+        filetypes = [
+            ("图片文件", "*.jpg *.jpeg *.png *.bmp"),
+            ("所有文件", "*.*")  # 可选：允许选择所有文件
+        ]
+        self.f_name = askopenfilename(initialdir=os.getcwd(), title='选择头像', filetypes=filetypes)
         if len(self.f_name) == 0:
             return
 
@@ -139,7 +143,11 @@ class IDGen:
         draw.text((1050, 2750), self.eOrg.get(), fill=(0, 0, 0), font=other_font)
         draw.text((1050, 2895), self.eLife.get(), fill=(0, 0, 0), font=other_font)
 
-        if self.eBgvar.get():
+        if self.eBgVar.get():
+            if self.eFaceVar.get():
+                face_img = "out-face.png"
+                face_opencv.crop_face_opencv(self.f_name, face_img)
+                avatar = PImage.open(face_img)
             avatar = cv2.cvtColor(numpy.asarray(avatar), cv2.COLOR_RGBA2BGRA)
             empty_image = cv2.cvtColor(numpy.asarray(empty_image), cv2.COLOR_RGBA2BGRA)
             empty_image = change_background(avatar, empty_image, (500, 670), (690, 1500))
@@ -200,10 +208,15 @@ class IDGen:
         self.eLife = Entry(root, width=32)
         self.eLife.grid(row=6, column=1, sticky=tkinter.W, padx=3, pady=3, columnspan=5)
         Label(root, text='选项:').grid(row=7, column=0, sticky=tkinter.W, padx=3, pady=3)
-        self.eBgvar = tkinter.IntVar()
-        self.eBgvar.set(1)
-        self.ebg = Checkbutton(root, text='自动抠图', variable=self.eBgvar)
-        self.ebg.grid(row=7, column=1, sticky=tkinter.W, padx=3, pady=3, columnspan=5)
+        self.eBgVar = tkinter.IntVar()
+        self.eBgVar.set(1)
+        self.ebgBtn = Checkbutton(root, text='自动抠图', variable=self.eBgVar)
+        self.ebgBtn.grid(row=7, column=1, sticky=tkinter.W, padx=3, pady=3, columnspan=5)
+
+        self.eFaceVar = tkinter.IntVar()
+        self.eFaceVar.set(1)
+        self.eFaceBtn = Checkbutton(root, text='抠取人脸', variable=self.eFaceVar)
+        self.eFaceBtn.grid(row=7, column=3, sticky=tkinter.W, padx=3, pady=3, columnspan=5)
 
         random_btn = Button(root, text='随机', width=8, command=self.random_data)
         random_btn.grid(row=8, column=0, sticky=tkinter.W, padx=16, pady=3, columnspan=2)

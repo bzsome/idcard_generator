@@ -16,6 +16,12 @@
 
 注意：macos版本启动大约需要时间70s，测试支持系统Macos 11
 
+### 功能说明
+
+自动抠图：勾选后移除背景色，会保留所有人体图片。不勾选则直接将原图片嵌入
+
+抠取人脸：只扣取大头像。不勾选则只人体图片 或 直接原图片嵌入
+
 ### 运行效果图
 
 - 程序主界面（windows）
@@ -42,11 +48,15 @@
 
 - 生成图片时显示处理弹窗
 
+- 自动从图片中扣取人脸
+
 ### 待解决问题
 
 - 生成时禁止主窗口关闭
 
 - 选择图片时过滤文件类型
+
+- 分割成两张图片：正面和反面
 
 ## 编译开发
 
@@ -110,7 +120,8 @@ if hasattr(os, '__builtins__'):
 
 ### --mode='x' is specified
 
-警告信息：Using module mode specific option '--no-pyi-x' has no effect when neither '--mode=module' or --mode='package' is specified.
+警告信息：Using module mode specific option '--no-pyi-x' has no effect when neither '--mode=module' or --mode='package'
+is specified.
 
 解决方案：--standalone 模式时默认不生成pyi文件，所以有此参数时不需要-no-pyi参数
 
